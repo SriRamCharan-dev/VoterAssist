@@ -131,17 +131,24 @@ export default function Chatbot({ context }) {
           </div>
           
           <div className="flex items-center gap-2">
+            <label htmlFor="language-select" className="sr-only">Select Language</label>
             <select 
+              id="language-select"
               value={language} 
               onChange={(e) => setLanguage(e.target.value)}
               className="bg-primary-800 text-xs text-white border border-primary-700 rounded px-1 py-0.5 focus:outline-none"
+              aria-label="Language selection for Voice Assistant"
             >
               <option value="English">ENG</option>
               <option value="Hindi">HIN</option>
               <option value="Telugu">TEL</option>
             </select>
-            <button onClick={toggleChat} className="text-primary-200 hover:text-white transition-colors focus:outline-none">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <button 
+              onClick={toggleChat} 
+              className="text-primary-200 hover:text-white transition-colors focus:outline-none"
+              aria-label="Close Chatbot"
+            >
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -195,20 +202,24 @@ export default function Chatbot({ context }) {
         {/* Input Area */}
         <div className="p-3 bg-white border-t border-slate-100 flex-shrink-0">
           <form onSubmit={handleSubmit} className="flex gap-2">
+            <label htmlFor="chatbot-input" className="sr-only">Ask your question</label>
             <input
+              id="chatbot-input"
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask anything..."
               disabled={isTyping}
               className="flex-1 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all disabled:opacity-50"
+              aria-label="Chatbot input field"
             />
             <button
               type="submit"
               disabled={!inputValue.trim() || isTyping}
               className="w-10 h-10 rounded-xl bg-primary-600 text-white flex items-center justify-center hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:bg-slate-300"
+              aria-label="Send message"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
               </svg>
             </button>
@@ -222,14 +233,15 @@ export default function Chatbot({ context }) {
         className={`w-14 h-14 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary-300 pointer-events-auto ${
           isOpen ? 'bg-slate-800 hover:bg-slate-900' : 'bg-primary-600 hover:bg-primary-700 hover:scale-105'
         }`}
-        aria-label="Toggle chat window"
+        aria-label={isOpen ? "Close chat window" : "Open VoterAssist chat window"}
+        aria-expanded={isOpen}
       >
         {isOpen ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
           </svg>
         )}

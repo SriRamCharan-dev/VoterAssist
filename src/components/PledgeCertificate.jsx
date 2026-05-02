@@ -1,15 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { db } from '../firebase';
+import { doc, getDoc, setDoc, increment } from 'firebase/firestore';
 
 export default function PledgeCertificate() {
   const [name, setName] = useState('');
   const [hasPledged, setHasPledged] = useState(false);
   const [date] = useState(new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' }));
+  const [globalPledges, setGlobalPledges] = useState(12845); // Fallback mock starting number
 
-  const handlePledge = (e) => {
+  useEffect(() => {
+    const fetchPledges = async () => {
+      try {
+        const docRef = doc(db, "stats", "global");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists() && docSnap.data().pledgeCount) {
+          setGlobalPledges(docSnap.data().pledgeCount);
+        }
+      } catch (e) {
+        // Fallback to local mock data if Firebase keys aren't set
+        console.log("Firebase using local mock data for hackathon presentation.");
+      }
+    };
+    fetchPledges();
+  }, []);
+
+  const handlePledge = async (e) => {
     e.preventDefault();
     if (name.trim()) {
       setHasPledged(true);
+      setGlobalPledges(prev => prev + 1);
+      try {
+        const docRef = doc(db, "stats", "global");
+        await setDoc(docRef, { pledgeCount: increment(1) }, { merge: true });
+      } catch (e) {
+        // Ignore firebase errors on mock usage
+      }
     }
   };
 
@@ -20,6 +46,13 @@ export default function PledgeCertificate() {
           <span className="text-4xl">📜</span> Pledge to Vote
         </h2>
         <p className="text-slate-400 text-sm mt-2">Commit to democracy. Generate your official digital pledge certificate.</p>
+        <div className="mt-4 inline-flex items-center gap-2 bg-yellow-900/30 border border-yellow-700/50 text-yellow-500 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-500"></span>
+          </span>
+          Join {globalPledges.toLocaleString()} Voters Who Have Pledged
+        </div>
       </div>
 
       <AnimatePresence mode="wait">
