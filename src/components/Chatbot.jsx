@@ -8,14 +8,27 @@ const QUICK_REPLIES = [
   { id: 'id_needed', text: 'What ID is needed?' }
 ];
 
-export default function Chatbot() {
+export default function Chatbot({ context }) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { sender: 'assistant', text: 'Hi there! I am your AI VoterAssist Guide. How can I help you prepare for the election today?' }
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [language, setLanguage] = useState('English');
   const messagesEndRef = useRef(null);
+
+  const speakText = (text) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      // Try to find a voice that matches the language
+      if (language === 'Hindi') utterance.lang = 'hi-IN';
+      else if (language === 'Telugu') utterance.lang = 'te-IN';
+      else utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -40,7 +53,13 @@ export default function Chatbot() {
       - Voting age is 18+.
       - Forms: Form 6 is for new voters.
       - Official site: voters.eci.gov.in.
-      Keep answers short and directly to the point.`;
+      Keep answers short and directly to the point.
+      
+      User Context:
+      - Overall Voter Readiness: ${context?.readiness || 0}%
+      - Current Step: ${['Eligibility', 'Registration', 'Preparation', 'Voting Day'][context?.activeStep || 0]}
+      
+      CRITICAL INSTRUCTION: You MUST respond exclusively in ${language}. If the language is not English, translate your response naturally. Use this context to personalize your responses.`;
 
       const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method: 'POST',
@@ -66,6 +85,7 @@ export default function Chatbot() {
       const text = data.choices[0].message.content;
 
       setMessages(prev => [...prev, { sender: 'assistant', text: text }]);
+      speakText(text); // Auto-read the response
     } catch (error) {
       console.error("AI Error:", error);
       setMessages(prev => [...prev, { sender: 'assistant', text: 'Sorry, I am having trouble connecting to my servers. Please try again.' }]);
@@ -109,11 +129,23 @@ export default function Chatbot() {
               <p className="text-primary-200 text-xs">Powered by Groq</p>
             </div>
           </div>
-          <button onClick={toggleChat} className="text-primary-200 hover:text-white transition-colors focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          
+          <div className="flex items-center gap-2">
+            <select 
+              value={language} 
+              onChange={(e) => setLanguage(e.target.value)}
+              className="bg-primary-800 text-xs text-white border border-primary-700 rounded px-1 py-0.5 focus:outline-none"
+            >
+              <option value="English">ENG</option>
+              <option value="Hindi">HIN</option>
+              <option value="Telugu">TEL</option>
+            </select>
+            <button onClick={toggleChat} className="text-primary-200 hover:text-white transition-colors focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Chat History */}
