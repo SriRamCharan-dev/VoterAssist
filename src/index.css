@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  /* Modern Indigo & Slate Palette */
+  --color-primary-50: #f5f7ff;
+  --color-primary-100: #ebf0fe;
+  --color-primary-200: #ced9fd;
+  --color-primary-300: #adc0fc;
+  --color-primary-400: #8ba7fa;
+  --color-primary-500: #6366f1; /* Indigo 500 */
+  --color-primary-600: #4f46e5; /* Indigo 600 */
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+  
+  --color-surface: #ffffff;
+  --color-background: #f8fafc;
+  
+  --color-accent: #f43f5e; /* Rose 500 */
+}
+
+body {
+  @apply bg-background text-slate-900 font-sans antialiased;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.35s ease-out both;
+}
+
+/* Custom scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
