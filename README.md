@@ -1,45 +1,44 @@
-# VoterAssist - An Intent-Driven Election Guide 🗳️
+# VoterAssist - The Intent-Driven AI Election Guide 🗳️
 
-VoterAssist is an interactive, 4-stage guided web application built for the **PromptWars Virtual Challenge 2**. It simplifies the complex and fragmented election process into a seamless user journey using AI-driven development and modern web technologies.
+VoterAssist is a high-performance, interactive, and AI-powered web application built for the **PromptWars Virtual Challenge 2**. It transforms the complex, fragmented election process into a seamless, gamified, and deeply personal user journey.
 
-## 🚀 Live Demo
-Check out the live application: **[voter-assist.vercel.app](https://voter-assist.vercel.app)**
+## 🚀 Live Demo & Repository
+- **Live URL:** [voter-assist.vercel.app](https://voter-assist.vercel.app)
+- **GitHub:** [SriRamCharan-dev/VoterAssist](https://github.com/SriRamCharan-dev/VoterAssist)
 
-## 🛠️ Tech Stack
+## 🛠️ The "Intent-Driven" Tech Stack
 - **Frontend:** React, Tailwind CSS
-- **Animations:** Framer Motion
-- **AI-Driven Development:** Google Antigravity, Gemini 3.1 Pro, Claude 3.5 Sonnet
+- **Animations:** Framer Motion (3D Transforms, Physics-based UI)
+- **AI Core:** Google Antigravity, Groq (Llama 3.1 70B & 8B Instant)
 - **Deployment:** Vercel
 
-## ✨ Key Features
-- **Dynamic Voter Readiness Dashboard:** Gamified progress tracking to encourage completion.
-- **Interactive Stepper:** A step-by-step registration guide.
-- **AI Chatbot:** Real-time electoral assistance powered by Groq (Llama 3.1).
-- **Document Vault:** A searchable checklist of the 12 official identity documents.
-- **Booth Locator:** Pincode-based intelligence for finding local polling stations.
-- **Local Persistence:** Progress is automatically saved using `localStorage`.
+## ✨ Advanced "10/10" Features
+
+### 🧠 AI-Powered Intelligence
+- **Context-Aware AI Chatbot:** A multilingual (English, Hindi, Telugu) assistant that knows your current dashboard progress and provides real-time guidance via text and **Voice (Text-to-Speech)**.
+- **AI Personalized Action Plan:** Generates a custom 3-point strategy based on your current voter readiness and stage.
+- **AI Fake News Detector:** Uses LLM reasoning to fact-check election-related claims and WhatsApp forwards instantly.
+- **AI Voter Personality Quiz:** Analyzes your civic priorities to assign you a unique "Voter Archetype" badge.
+
+### 🗳️ Interactive Simulations
+- **Full-Booth EVM Simulator:** A professional voting booth experience with red curtains, ambient lighting, and high-fidelity EVM sounds (Web Audio API).
+- **VVPAT Animation:** Real-time generation of the voter-verified paper audit trail slip.
+- **Live Mock Results:** A dynamic, auto-updating dashboard showing simulated election turnout and candidate leading status.
+
+### 🎓 Educational Tools & Gamification
+- **Voter Readiness Dashboard:** A gamified 0-100% progress tracker that keeps users engaged.
+- **3D "Know Your Rights" Flashcards:** Interactive 3D flipping cards that make learning election rules fun and memorable.
+- **"Pledge to Vote" Certificate:** Generates a formal digital certificate with the user's name and a custom gold seal.
+- **Ink Stamp Celebration:** A dramatic, full-screen "VOTED" ink stamp animation upon completing the journey.
 
 ## 📖 Technical Blog
-Read the full technical breakdown on Dev.to: **[Link Coming Soon]**
+Read the full technical breakdown of the architecture, prompt engineering, and design system on Dev.to: **[Link to Blog Post]**
 
-## 🔧 Installation & Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/SriRamCharan-dev/VoterAssist.git
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Set up environment variables:
-   Create a `.env` file and add:
-   ```env
-   VITE_GROQ_API_KEY=your_api_key_here
-   ```
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
+## 🔧 Installation
+1. Clone: `git clone https://github.com/SriRamCharan-dev/VoterAssist.git`
+2. Install: `npm install`
+3. Configure: Add `VITE_GROQ_API_KEY` to your `.env` file.
+4. Launch: `npm run dev`
 
-## 🏆 PromptWars Virtual Challenge 2
-Built with ❤️ by [Sri Ram Charan Nandigam](https://github.com/SriRamCharan-dev) using the **Intent-Driven Architecture** provided by Google Antigravity.
+---
+*Built with ❤️ for PromptWars by [Sri Ram Charan Nandigam](https://github.com/SriRamCharan-dev).*
