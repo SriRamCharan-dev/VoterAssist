@@ -4,6 +4,14 @@ import Stepper from './components/Stepper';
 import Chatbot from './components/Chatbot';
 import HeroPage from './components/HeroPage';
 import ElectionTimeline from './components/ElectionTimeline';
+import AIPersonalizedPlan from './components/AIPersonalizedPlan';
+import EVMSimulator from './components/EVMSimulator';
+import FakeNewsDetector from './components/FakeNewsDetector';
+import VoterPersonalityQuiz from './components/VoterPersonalityQuiz';
+import MockResultsDashboard from './components/MockResultsDashboard';
+import VotedStampOverlay from './components/VotedStampOverlay';
+import PledgeCertificate from './components/PledgeCertificate';
+import RightsFlashcards from './components/RightsFlashcards';
 
 function App() {
   const [showLandingPage, setShowLandingPage] = useState(() => {
@@ -16,10 +24,16 @@ function App() {
     return saved ? parseInt(saved, 10) : 0;
   });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showStamp, setShowStamp] = useState(false);
+  const [stampShown, setStampShown] = useState(false);
 
   const handleProgressChange = useCallback((percentage) => {
     setReadiness(percentage);
-  }, []);
+    if (percentage === 100 && !stampShown) {
+      setShowStamp(true);
+      setStampShown(true);
+    }
+  }, [stampShown]);
 
   const handleGetStarted = (stepIndex = 0) => {
     const index = typeof stepIndex === 'number' ? stepIndex : 0;
@@ -144,10 +158,15 @@ function App() {
               </div>
             </div>
 
-            {/* Election Roadmap Timeline */}
-            <div id="resources">
-              <ElectionTimeline />
-            </div>
+            {/* AI Personalized Action Plan */}
+            <AIPersonalizedPlan readiness={readiness} activeStep={activeStep} />
+
+            {/* Election Roadmap Timeline (Shown only in Preparation Step 2) */}
+            {activeStep === 2 && (
+              <div id="resources" className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <ElectionTimeline />
+              </div>
+            )}
 
             {/* Interactive Stepper */}
             <Stepper 
@@ -155,6 +174,62 @@ function App() {
               setActiveStep={setActiveStep} 
               onProgressChange={handleProgressChange} 
             />
+
+            {/* Contextual Tools based on Active Step */}
+            <div className="mt-8 space-y-12">
+              
+              {/* STEP 0: ELIGIBILITY */}
+              {activeStep === 0 && (
+                <div className="animate-in fade-in zoom-in-95 duration-500 space-y-8">
+                  <VoterPersonalityQuiz />
+                  <div className="pt-4">
+                    <RightsFlashcards />
+                  </div>
+                </div>
+              )}
+
+              {/* STEP 2: PREPARATION */}
+              {activeStep === 2 && (
+                <div className="animate-in fade-in zoom-in-95 duration-500">
+                  <div className="text-center mb-6">
+                    <span className="inline-block bg-violet-100 text-violet-700 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2">AI-Powered Tool</span>
+                    <h2 className="text-2xl font-extrabold text-slate-900">Verify Before You Trust</h2>
+                    <p className="text-slate-500 text-sm mt-1">Don't let misinformation sway your vote. Fact-check claims instantly.</p>
+                  </div>
+                  <FakeNewsDetector />
+                </div>
+              )}
+
+              {/* STEP 3: VOTING DAY */}
+              {activeStep === 3 && (
+                <div className="animate-in fade-in zoom-in-95 duration-500 space-y-12">
+                  {/* EVM Simulator Section */}
+                  <div>
+                    <div className="text-center mb-6">
+                      <span className="inline-block bg-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2">Interactive Demo</span>
+                      <h2 className="text-2xl font-extrabold text-slate-900">Practice on a Real EVM</h2>
+                      <p className="text-slate-500 text-sm mt-1">Try casting a vote before Election Day — risk free!</p>
+                    </div>
+                    <EVMSimulator />
+                  </div>
+
+                  {/* Live Results Dashboard */}
+                  <div>
+                    <div className="text-center mb-6">
+                      <span className="inline-block bg-red-100 text-red-700 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2">Live Simulation</span>
+                      <h2 className="text-2xl font-extrabold text-slate-900">Mock Election Results</h2>
+                      <p className="text-slate-500 text-sm mt-1">Experience how real-time vote counting looks on Election Day.</p>
+                    </div>
+                    <MockResultsDashboard />
+                  </div>
+
+                  {/* Pledge to Vote Certificate */}
+                  <div className="pt-8 border-t border-slate-200">
+                    <PledgeCertificate />
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* Reset Progress Button */}
             <div className="flex justify-center pt-4 pb-8">
@@ -178,7 +253,8 @@ function App() {
 
           </main>
 
-          <Chatbot />
+          <Chatbot context={{ readiness, activeStep }} />
+          <VotedStampOverlay show={showStamp} onDismiss={() => setShowStamp(false)} />
 
           <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-slate-400 text-sm">© 2026 VoterAssist. Your voice matters.</p>
