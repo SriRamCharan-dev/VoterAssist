@@ -1,16 +1,45 @@
-# React + Vite
+# VoterAssist - An Intent-Driven Election Guide 🗳️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+VoterAssist is an interactive, 4-stage guided web application built for the **PromptWars Virtual Challenge 2**. It simplifies the complex and fragmented election process into a seamless user journey using AI-driven development and modern web technologies.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
+Check out the live application: **[voter-assist.vercel.app](https://voter-assist.vercel.app)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Tech Stack
+- **Frontend:** React, Tailwind CSS
+- **Animations:** Framer Motion
+- **AI-Driven Development:** Google Antigravity, Gemini 3.1 Pro, Claude 3.5 Sonnet
+- **Deployment:** Vercel
 
-## React Compiler
+## ✨ Key Features
+- **Dynamic Voter Readiness Dashboard:** Gamified progress tracking to encourage completion.
+- **Interactive Stepper:** A step-by-step registration guide.
+- **AI Chatbot:** Real-time electoral assistance powered by Groq (Llama 3.1).
+- **Document Vault:** A searchable checklist of the 12 official identity documents.
+- **Booth Locator:** Pincode-based intelligence for finding local polling stations.
+- **Local Persistence:** Progress is automatically saved using `localStorage`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📖 Technical Blog
+Read the full technical breakdown on Dev.to: **[Link Coming Soon]**
 
-## Expanding the ESLint configuration
+## 🔧 Installation & Setup
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/SriRamCharan-dev/VoterAssist.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables:
+   Create a `.env` file and add:
+   ```env
+   VITE_GROQ_API_KEY=your_api_key_here
+   ```
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🏆 PromptWars Virtual Challenge 2
+Built with ❤️ by [Sri Ram Charan Nandigam](https://github.com/SriRamCharan-dev) using the **Intent-Driven Architecture** provided by Google Antigravity.
