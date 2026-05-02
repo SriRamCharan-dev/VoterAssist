@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import Stepper from './components/Stepper';
 import Chatbot from './components/Chatbot';
 import HeroPage from './components/HeroPage';
@@ -191,6 +192,7 @@ function App() {
           </footer>
         </motion.div>
       )}
+      <SpeedInsights />
     </AnimatePresence>
   );
 }
