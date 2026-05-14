@@ -26,6 +26,20 @@ body {
   @apply bg-background text-slate-900 font-sans antialiased;
 }
 
+::selection {
+  background: color-mix(in srgb, var(--color-primary-500) 22%, transparent);
+  color: var(--color-primary-900);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
