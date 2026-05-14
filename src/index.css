@@ -27,8 +27,8 @@ body {
 }
 
 ::selection {
-  background: rgba(99, 102, 241, 0.22);
-  color: #0f172a;
+  background: color-mix(in srgb, var(--color-primary-500) 22%, transparent);
+  color: var(--color-primary-900);
 }
 
 a:focus-visible,
