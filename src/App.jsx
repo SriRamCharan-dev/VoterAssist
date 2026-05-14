@@ -63,13 +63,13 @@ function App() {
       ) : (
         <motion.div
           key="dashboard"
-          className="min-h-screen bg-background"
+          className="min-h-screen bg-gradient-to-b from-background via-primary-50/40 to-background"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           {/* Navigation Bar */}
-          <nav className="bg-primary-900 shadow-md sticky top-0 z-50">
+          <nav className="bg-primary-900/90 backdrop-blur-md border-b border-primary-700/60 shadow-md sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between h-16 items-center">
                 <button
@@ -85,9 +85,9 @@ function App() {
                 </button>
 
                 <div className="hidden md:flex items-center space-x-8">
-                  <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-primary-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</button>
-                  <button onClick={() => alert('Profile feature coming soon!')} className="text-primary-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">My Profile</button>
-                  <button onClick={() => { const el = document.getElementById('resources'); if(el) el.scrollIntoView({ behavior: 'smooth' }); }} className="text-primary-100 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Resources</button>
+                  <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-primary-100 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</button>
+                  <button onClick={() => alert('Profile feature coming soon!')} className="text-primary-100 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">My Profile</button>
+                  <button onClick={() => { const el = document.getElementById('resources'); if(el) el.scrollIntoView({ behavior: 'smooth' }); }} className="text-primary-100 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-colors">Resources</button>
                   <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="bg-primary-600 hover:bg-primary-500 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors shadow-sm">
                     Back to Top
                   </button>
@@ -109,19 +109,22 @@ function App() {
             </div>
             {/* Mobile Menu Panel */}
             {isMobileMenuOpen && (
-              <div className="md:hidden bg-primary-800 px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <button onClick={() => { setIsMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">Dashboard</button>
-                <button onClick={() => { setIsMobileMenuOpen(false); alert('Profile feature coming soon!'); }} className="text-primary-100 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">My Profile</button>
-                <button onClick={() => { setIsMobileMenuOpen(false); const el = document.getElementById('resources'); if(el) el.scrollIntoView({ behavior: 'smooth' }); }} className="text-primary-100 hover:text-white block px-3 py-2 rounded-md text-base font-medium w-full text-left">Resources</button>
+              <div className="md:hidden bg-primary-800/95 backdrop-blur-sm px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <button onClick={() => { setIsMobileMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="text-white hover:bg-white/10 block px-3 py-2 rounded-md text-base font-medium w-full text-left">Dashboard</button>
+                <button onClick={() => { setIsMobileMenuOpen(false); alert('Profile feature coming soon!'); }} className="text-primary-100 hover:text-white hover:bg-white/10 block px-3 py-2 rounded-md text-base font-medium w-full text-left">My Profile</button>
+                <button onClick={() => { setIsMobileMenuOpen(false); const el = document.getElementById('resources'); if(el) el.scrollIntoView({ behavior: 'smooth' }); }} className="text-primary-100 hover:text-white hover:bg-white/10 block px-3 py-2 rounded-md text-base font-medium w-full text-left">Resources</button>
               </div>
             )}
           </nav>
 
           {/* Main Content */}
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+          <main className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 overflow-hidden">
+            <div className="pointer-events-none absolute -top-12 -left-12 h-44 w-44 rounded-full bg-primary-200/35 blur-3xl" />
+            <div className="pointer-events-none absolute top-1/3 -right-16 h-56 w-56 rounded-full bg-blue-200/35 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-12 left-1/3 h-40 w-40 rounded-full bg-violet-200/30 blur-3xl" />
 
             {/* Voter Readiness Progress Card */}
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden transform transition-all duration-500 hover:shadow-xl">
+            <div className="relative bg-gradient-to-br from-white to-primary-50/30 rounded-2xl shadow-lg border border-slate-100 overflow-hidden transform transition-all duration-500 hover:shadow-xl">
               <div className="p-8 sm:p-10">
                 <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight mb-1">Welcome to your dashboard</h1>
                 <p className="text-slate-500 text-base mb-8 max-w-3xl">Complete each step below to ensure you are fully prepared for the upcoming election.</p>
@@ -176,7 +179,7 @@ function App() {
             />
 
             {/* Contextual Tools based on Active Step */}
-            <div className="mt-8 space-y-12">
+            <div className="mt-8 space-y-12 bg-white/75 backdrop-blur-sm border border-slate-200 rounded-3xl p-5 sm:p-7 shadow-sm">
               
               {/* STEP 0: ELIGIBILITY */}
               {activeStep === 0 && (
@@ -258,7 +261,7 @@ function App() {
 
           <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-slate-400 text-sm">© 2026 VoterAssist. Your voice matters.</p>
-            <div className="flex items-center gap-2 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
+            <div className="flex items-center gap-2 bg-blue-50/90 px-3 py-1.5 rounded-full border border-blue-100 shadow-sm">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
